@@ -1,0 +1,125 @@
+{
+  "theme": "light",
+  "archetype": "1_and_5_hybrid",
+  "archetype_description": "A hybrid of Organic & Earthy (Arch 1) for the spa/wellness aspect, crossed with Jewel & Luxury (Arch 5 - Light Variant) for the high-end boutique fashion and makeup. The vibe is 'African-Luxury-Fusion'—editorial, warm, exclusive, and empowering.",
+  "colors": {
+    "background": "#FDFBF7",
+    "foreground": "#1A1715",
+    "primary": "#8C3A3A",
+    "primary_foreground": "#FFFFFF",
+    "secondary": "#E8D8CE",
+    "secondary_foreground": "#1A1715",
+    "muted": "#F0EBE1",
+    "muted_foreground": "#635B54",
+    "border": "#D5CCC3",
+    "input": "#D5CCC3",
+    "ring": "#8C3A3A",
+    "accent": "#B66D46",
+    "accent_foreground": "#FFFFFF",
+    "destructive": "#7F1D1D",
+    "destructive_foreground": "#FFFFFF",
+    "card": "#FFFFFF",
+    "card_foreground": "#1A1715",
+    "popover": "#FFFFFF",
+    "popover_foreground": "#1A1715"
+  },
+  "typography": {
+    "headings": {
+      "font_family": "Cormorant Garamond, serif",
+      "weights": ["300", "400", "600"],
+      "tracking": "tracking-tight",
+      "h1": "text-4xl sm:text-5xl lg:text-6xl font-light",
+      "h2": "text-3xl sm:text-4xl font-normal",
+      "h3": "text-2xl sm:text-3xl font-normal",
+      "h4": "text-xl sm:text-2xl font-medium"
+    },
+    "body": {
+      "font_family": "Outfit, sans-serif",
+      "weights": ["300", "400", "500"],
+      "tracking": "tracking-normal",
+      "base": "text-base font-light leading-relaxed",
+      "small": "text-sm font-light",
+      "overline": "text-xs font-medium uppercase tracking-[0.2em]"
+    }
+  },
+  "layout_and_spacing": {
+    "generous_spacing": true,
+    "section_padding": "py-24 sm:py-32",
+    "container": "max-w-7xl mx-auto px-6 sm:px-8",
+    "grid_strategy": "MODE A: THE TETRIS GRID (Asymmetric, editorial overlapping elements. grid-cols-1 md:grid-cols-12 gap-8 to gap-12)",
+    "border_radius": "rounded-none sm:rounded-sm",
+    "alignment": "Left-aligned for textual content to maintain editorial rigor; center-aligned only for specific hero statements or single-focus product highlights."
+  },
+  "components": {
+    "buttons": {
+      "primary": "bg-[#8C3A3A] text-white hover:bg-[#702E2E] transition-all duration-300 ease-out rounded-none px-8 py-4 text-sm font-medium tracking-widest uppercase",
+      "secondary": "border border-[#1A1715] bg-transparent text-[#1A1715] hover:bg-[#1A1715] hover:text-white transition-all duration-300 ease-out rounded-none px-8 py-4 text-sm font-medium tracking-widest uppercase",
+      "ghost": "text-[#1A1715] hover:text-[#8C3A3A] hover:bg-transparent transition-colors duration-300 text-sm font-medium uppercase tracking-widest underline underline-offset-4"
+    },
+    "cards": {
+      "product_card": "bg-transparent border-none group cursor-pointer",
+      "product_image_wrapper": "overflow-hidden relative mb-4",
+      "product_image": "w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105",
+      "product_info": "flex flex-col space-y-1 text-left",
+      "feature_card": "bg-[#E8D8CE]/30 p-8 sm:p-12 border border-[#D5CCC3]/50"
+    },
+    "navigation": {
+      "header": "fixed top-0 w-full z-50 backdrop-blur-xl bg-[#FDFBF7]/80 border-b border-[#1A1715]/5 transition-all duration-300",
+      "links": "text-sm uppercase tracking-widest text-[#1A1715] hover:text-[#8C3A3A] transition-colors"
+    },
+    "marquee": {
+      "style": "The Editorial Ribbon",
+      "classes": "py-6 bg-[#E8D8CE]/20 text-[#1A1715] border-y border-[#1A1715]/5",
+      "text_classes": "font-serif text-lg tracking-widest uppercase mx-12"
+    },
+    "inputs": {
+      "base": "border-b border-[#1A1715]/20 bg-transparent rounded-none px-0 py-3 focus:ring-0 focus:border-[#8C3A3A] focus-visible:ring-0 text-base font-sans transition-colors placeholder:text-[#1A1715]/40"
+    }
+  },
+  "visual_enhancers": {
+    "surfaces": "Glassmorphism for header (Crystal Glass variant), solid flat surfaces for main content. No drop shadows on cards—rely on 1px borders and distinct negative space.",
+    "hover_states": "Darken background hues, elevate contrast. Images scale slowly (transform scale-105 duration-700) to feel cinematic.",
+    "textures": "Use subtle grain or noise overlays in dark sections or footer to avoid digital flatness."
+  },
+  "media": {
+    "image_urls": {
+      "hero_fashion": {
+        "url": "https://images.unsplash.com/photo-1622444913718-dde4471ce697?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxODd8MHwxfHNlYXJjaHwyfHxlbGVnYW50JTIwYWZyaWNhbiUyMHdvbWFuJTIwYmxhemVyJTIwZmFzaGlvbnxlbnwwfHx8fDE3NzcyOTA3NzV8MA&ixlib=rb-4.1.0&q=85",
+        "description": "Elegant African woman in white blazer standing. Perfect for the hero banner."
+      },
+      "category_makeup": {
+        "url": "https://images.pexels.com/photos/4416763/pexels-photo-4416763.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+        "description": "Striking image of red and burgundy lipsticks with gold packaging. Represents NORA cosmetics."
+      },
+      "category_spa": {
+        "url": "https://images.pexels.com/photos/36327500/pexels-photo-36327500.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+        "description": "Serene spa massage setting with warm lighting and essential oils. Represents the Spa & Wellness section."
+      },
+      "category_fashion": {
+        "url": "https://images.pexels.com/photos/4456716/pexels-photo-4456716.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+        "description": "Elegant fashion portrait of a woman in a beige trench coat. Represents the clothing boutique."
+      },
+      "texture_background": {
+        "url": "https://images.pexels.com/photos/4913798/pexels-photo-4913798.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+        "description": "Textured background of coral light embossed plaster. Good for editorial accent sections or footer background."
+      }
+    }
+  },
+  "accessibility": {
+    "contrast": "Ensure text over images uses a subtle gradient overlay (e.g., bg-gradient-to-t from-black/60 to-transparent) to meet WCAG AA standards. Interactive states must clearly shift in contrast.",
+    "focus": "focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#8C3A3A]",
+    "motion": "Use prefers-reduced-motion media query to disable the slow image scaling or marquee if requested by the user."
+  },
+  "instructions_to_main_agent": [
+    "Implement an editorial, magazine-style layout using the provided fonts: Cormorant Garamond for headings and Outfit for body text.",
+    "Do NOT use default Inter, Roboto, or generic layouts. Avoid center-aligning everything; lean into asymmetric, staggered grid layouts (e.g., one large image next to a smaller text block that aligns to the bottom).",
+    "Use the provided colors to build a Tailwind configuration. Base background is warm bone white (#FDFBF7), text is deep espresso (#1A1715), and accents are terracotta (#8C3A3A).",
+    "In the Hero section, use the 'hero_fashion' image. Do not blanket the image in a heavy dark overlay. Use a subtle gradient or position text in negative space.",
+    "Build a Marquee component using `react-fast-marquee` (Option A: Editorial Ribbon) that slowly scrolls 'WHERE ELEGANCE MEETS EXCLUSIVITY • NORA COSMETICS • BEAUTY & WELLNESS'.",
+    "For the E-commerce functionality, use Shadcn for standard interactive bits (select, dialogs, drawers for cart, form inputs for checkout) but customize their borders and radiuses to match this theme's sharp, elegant aesthetic (rounded-none).",
+    "Include a Floating AI Chatbot widget (bottom right, #8C3A3A primary color).",
+    "Ensure the DPO payment integration flow in the checkout uses clean, trusted UI patterns.",
+    "Store currency is BWP. Render prices elegantly, e.g., 'BWP 1,200'.",
+    "Add `data-testid` to all interactive elements for robust testing."
+  ]
+}
