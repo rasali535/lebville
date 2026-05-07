@@ -23,7 +23,7 @@ export default function Footer() {
           <ul className="space-y-3 text-sm font-light">
             <li><Link to="/shop" className="hover:text-terracotta transition-colors">All products</Link></li>
             <li><Link to="/shop?category=clothing" className="hover:text-terracotta">Clothing</Link></li>
-            <li><Link to="/shop?category=makeup" className="hover:text-terracotta">NORA Cosmetics</Link></li>
+            <li><Link to="/shop?category=makeup" className="hover:text-terracotta">HL/SKIN Beauty</Link></li>
             <li><Link to="/shop?category=skincare" className="hover:text-terracotta">Skincare</Link></li>
             <li><Link to="/shop?tag=clearance" className="hover:text-terracotta">Clearance</Link></li>
           </ul>

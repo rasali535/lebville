@@ -1,5 +1,18 @@
-RewriteEngine On
-RewriteRule ^$ frontend/build/index.html [L]
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.*)$ frontend/build/$1 [L]
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+  
+  # Redirect /assets to /frontend/build/assets
+  RewriteRule ^assets/(.*)$ frontend/build/assets/$1 [L]
+  
+  # Redirect /static to /frontend/build/static
+  RewriteRule ^static/(.*)$ frontend/build/static/$1 [L]
+
+  # If a file or directory exists, serve it directly
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+
+  # Fallback to index.html for SPA routing
+  RewriteRule ^ index.html [L]
+</IfModule>

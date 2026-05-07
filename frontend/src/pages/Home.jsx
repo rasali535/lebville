@@ -46,7 +46,7 @@ export default function Home() {
               Explore the shop <ArrowRight size={14} />
             </Link>
             <Link to="/shop?category=makeup" className="btn-sharp text-espresso underline underline-offset-[6px] hover:text-terracotta">
-              Discover NORA
+              Discover HL/SKIN
             </Link>
           </div>
         </div>
@@ -91,7 +91,7 @@ export default function Home() {
             <div className="absolute inset-0 bg-gradient-to-t from-espresso/60 via-transparent to-transparent" />
             <div className="absolute bottom-0 left-0 p-6 sm:p-8 text-bone">
               <p className="overline opacity-80 mb-2">02 — Beauty</p>
-              <h3 className="font-serif text-3xl sm:text-4xl">HL Cosmetics.</h3>
+              <h3 className="font-serif text-3xl sm:text-4xl">HL/SKIN Cosmetics.</h3>
             </div>
           </Link>
           <Link to="/shop?category=skincare" className="group md:col-span-5 relative overflow-hidden aspect-[4/3]">
@@ -142,7 +142,7 @@ export default function Home() {
             ability to make a woman feel unapologetically herself.
           </p>
           <p>
-            Our boutique stocks limited-run designer pieces alongside our signature NORA cosmetics line —
+            Our boutique stocks limited-run designer pieces alongside our signature HL/SKIN cosmetics line —
             developed with rich pigments, weightless finishes, and tones engineered to complement African skin.
           </p>
           <p>
@@ -168,7 +168,7 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="group reveal" style={{ animationDelay: "0.1s" }}>
               <div className="aspect-[4/5] overflow-hidden mb-6">
-                <img src="/assets/service_manicure.png" alt="Signature Manicure" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                <img src="/assets/service-manicure.png" alt="Signature Manicure" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
               </div>
               <p className="overline text-terracotta mb-2">Hands & Feet</p>
               <h3 className="font-serif text-2xl mb-3">Signature Manicures</h3>
@@ -177,7 +177,7 @@ export default function Home() {
 
             <div className="group reveal" style={{ animationDelay: "0.2s" }}>
               <div className="aspect-[4/5] overflow-hidden mb-6">
-                <img src="/assets/service_facial.png" alt="Bespoke Facials" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                <img src="/assets/service-facial.png" alt="Bespoke Facials" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
               </div>
               <p className="overline text-terracotta mb-2">Skin Therapy</p>
               <h3 className="font-serif text-2xl mb-3">Bespoke Facials</h3>
@@ -186,7 +186,7 @@ export default function Home() {
 
             <div className="group reveal" style={{ animationDelay: "0.3s" }}>
               <div className="aspect-[4/5] overflow-hidden mb-6">
-                <img src="/assets/service_massage.png" alt="Body Wellness" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                <img src="/assets/service-massage.png" alt="Body Wellness" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
               </div>
               <p className="overline text-terracotta mb-2">Quiet Wellness</p>
               <h3 className="font-serif text-2xl mb-3">Holistic Massage</h3>

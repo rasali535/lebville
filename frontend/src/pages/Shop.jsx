@@ -7,7 +7,7 @@ import { Search, ChevronDown } from "lucide-react";
 const CATEGORY_LABELS = {
   all: "All products",
   clothing: "Clothing",
-  makeup: "NORA Cosmetics",
+  makeup: "HL/SKIN Beauty",
   skincare: "Skincare",
   accessories: "Accessories",
 };

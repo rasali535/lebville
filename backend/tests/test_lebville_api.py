@@ -80,14 +80,14 @@ class TestProducts:
         prices = [p["price"] for p in items]
         assert prices == sorted(prices, reverse=True)
 
-    def test_search_nora(self, session):
-        r = session.get(f"{API}/products", params={"search": "NORA"})
+    def test_search_hlskin(self, session):
+        r = session.get(f"{API}/products", params={"search": "HL/SKIN"})
         assert r.status_code == 200
         items = r.json() if isinstance(r.json(), list) else r.json().get("items") or []
         assert len(items) > 0
-        # At least one product name/brand/desc should contain 'nora'
+        # At least one product name/brand/desc should contain 'hl/skin'
         assert any(
-            "nora" in (p.get("name", "") + p.get("brand", "") + p.get("description", "")).lower()
+            "hl/skin" in (p.get("name", "") + p.get("brand", "") + p.get("description", "")).lower()
             for p in items
         )
 
@@ -97,7 +97,7 @@ class TestProducts:
         items = r.json() if isinstance(r.json(), list) else r.json().get("items") or []
         slug = None
         for p in items:
-            if "nora" in p.get("name", "").lower() or "nora" in p.get("slug", "").lower():
+            if "hl/skin" in p.get("name", "").lower() or "hl/skin" in p.get("slug", "").lower():
                 slug = p["slug"]
                 break
         if not slug:
