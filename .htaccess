@@ -6,6 +6,9 @@
   # Route /api/products to the PHP script
   RewriteRule ^api/products/?$ api/products/index.php [L,QSA]
 
+  # Route /api/chat/message to the PHP script
+  RewriteRule ^api/chat/message/?$ api/chat/message/index.php [L,QSA]
+
   # 2. Asset Routing
   # Redirect /assets to /frontend/build/assets
   RewriteRule ^assets/(.*)$ frontend/build/assets/$1 [L]
