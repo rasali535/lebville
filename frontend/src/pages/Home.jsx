@@ -7,7 +7,7 @@ import Marquee from "../components/Marquee";
 
 const HERO_IMG = "https://images.unsplash.com/photo-1622444913718-dde4471ce697?crop=entropy&cs=srgb&fm=jpg&w=1600&q=85";
 const STORY_IMG = "https://images.pexels.com/photos/4456716/pexels-photo-4456716.jpeg?auto=compress&cs=tinysrgb&w=1200";
-const MAKEUP_IMG = "https://images.pexels.com/photos/4416763/pexels-photo-4416763.jpeg?auto=compress&cs=tinysrgb&w=1200";
+const MAKEUP_IMG = "/assets/hlskin-hero.png";
 const SPA_IMG = "https://images.pexels.com/photos/36327500/pexels-photo-36327500.jpeg?auto=compress&cs=tinysrgb&w=1200";
 
 export default function Home() {
