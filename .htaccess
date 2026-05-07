@@ -2,17 +2,24 @@
   RewriteEngine On
   RewriteBase /
   
+  # 1. API Routing
+  # Route /api/products to the PHP script
+  RewriteRule ^api/products/?$ api/products/index.php [L,QSA]
+
+  # 2. Asset Routing
   # Redirect /assets to /frontend/build/assets
   RewriteRule ^assets/(.*)$ frontend/build/assets/$1 [L]
   
   # Redirect /static to /frontend/build/static
   RewriteRule ^static/(.*)$ frontend/build/static/$1 [L]
 
+  # 3. Static Files
   # If a file or directory exists, serve it directly
   RewriteCond %{REQUEST_FILENAME} -f [OR]
   RewriteCond %{REQUEST_FILENAME} -d
   RewriteRule ^ - [L]
 
-  # Fallback to index.html for SPA routing
+  # 4. SPA Routing
+  # Fallback to index.html for React routing
   RewriteRule ^ index.html [L]
 </IfModule>
