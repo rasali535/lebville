@@ -34,7 +34,7 @@ export default function Home() {
             exclusivity.
           </h1>
           <p className="mt-8 max-w-md text-base font-light leading-relaxed text-muted-foreground">
-            Curated boutique fashion, NORA cosmetics, and quiet wellness — designed for the woman
+            Curated boutique fashion, HL cosmetics, and quiet wellness — designed for the woman
             who knows what she wants, and refuses anything less.
           </p>
           <div className="mt-10 flex items-center gap-6">
@@ -91,7 +91,7 @@ export default function Home() {
             <div className="absolute inset-0 bg-gradient-to-t from-espresso/60 via-transparent to-transparent" />
             <div className="absolute bottom-0 left-0 p-6 sm:p-8 text-bone">
               <p className="overline opacity-80 mb-2">02 — Beauty</p>
-              <h3 className="font-serif text-3xl sm:text-4xl">NORA Cosmetics.</h3>
+              <h3 className="font-serif text-3xl sm:text-4xl">HL Cosmetics.</h3>
             </div>
           </Link>
           <Link to="/shop?category=skincare" className="group md:col-span-5 relative overflow-hidden aspect-[4/3]">
@@ -151,6 +151,51 @@ export default function Home() {
           </p>
         </div>
       </section>
+
+      {/* SERVICES SECTION */}
+      <section data-testid="services-section" className="bg-espresso text-bone py-24 sm:py-32">
+        <div className="max-w-[1400px] mx-auto px-6 sm:px-10">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-6">
+            <div>
+              <p className="overline text-terracotta mb-4">Our Services</p>
+              <h2 className="font-serif text-5xl sm:text-7xl leading-tight">The <em className="italic font-light text-terracotta">Sanctuary</em> Experience.</h2>
+            </div>
+            <p className="max-w-xs text-bone/60 font-light text-sm leading-relaxed">
+              From signature manicures to deep-tissue stillness, we offer a curated menu of treatments designed to restore and refine.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="group reveal" style={{ animationDelay: "0.1s" }}>
+              <div className="aspect-[4/5] overflow-hidden mb-6">
+                <img src="/assets/service_manicure.png" alt="Signature Manicure" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+              </div>
+              <p className="overline text-terracotta mb-2">Hands & Feet</p>
+              <h3 className="font-serif text-2xl mb-3">Signature Manicures</h3>
+              <p className="text-sm text-bone/50 font-light leading-relaxed">Precision shaping, cuticle care, and high-performance lacquer in our signature red or custom shades.</p>
+            </div>
+
+            <div className="group reveal" style={{ animationDelay: "0.2s" }}>
+              <div className="aspect-[4/5] overflow-hidden mb-6">
+                <img src="/assets/service_facial.png" alt="Bespoke Facials" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+              </div>
+              <p className="overline text-terracotta mb-2">Skin Therapy</p>
+              <h3 className="font-serif text-2xl mb-3">Bespoke Facials</h3>
+              <p className="text-sm text-bone/50 font-light leading-relaxed">Deep cleansing and hydration treatments tailored to your unique skin profile using premium active botanicals.</p>
+            </div>
+
+            <div className="group reveal" style={{ animationDelay: "0.3s" }}>
+              <div className="aspect-[4/5] overflow-hidden mb-6">
+                <img src="/assets/service_massage.png" alt="Body Wellness" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+              </div>
+              <p className="overline text-terracotta mb-2">Quiet Wellness</p>
+              <h3 className="font-serif text-2xl mb-3">Holistic Massage</h3>
+              <p className="text-sm text-bone/50 font-light leading-relaxed">Release tension with our signature hot stone or deep tissue massage in a restorative, dim-lit sanctuary.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
 
       {/* NEW ARRIVALS */}
       {newArrivals.length > 0 && (

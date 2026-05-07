@@ -8,11 +8,12 @@ export default function Footer() {
       <div className="grain absolute inset-0" />
       <div className="relative max-w-[1400px] mx-auto px-6 sm:px-10 py-20 grid grid-cols-1 md:grid-cols-12 gap-10">
         <div className="md:col-span-5">
+          <img src="/assets/logo.png" alt="Lebville" className="h-16 w-auto mb-8 brightness-0 invert opacity-80" />
           <h3 className="font-serif text-4xl sm:text-5xl leading-[1.05] mb-6">
             Where elegance<br /><em className="text-terracotta">meets</em> exclusivity.
           </h3>
           <p className="text-bone/70 max-w-md text-sm font-light leading-relaxed">
-            Lebville Boutique & Spa is Gaborone's destination for considered fashion, NORA cosmetics, and quiet
+            Lebville Boutique & Spa is Gaborone's destination for considered fashion, HL cosmetics, and quiet
             wellness. Curated. Made for confidence.
           </p>
         </div>
@@ -54,7 +55,7 @@ export default function Footer() {
       <div className="relative border-t border-bone/10">
         <div className="max-w-[1400px] mx-auto px-6 sm:px-10 py-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-bone/50">
           <p>© {new Date().getFullYear()} Lebville Boutique & Spa. All rights reserved.</p>
-          <p className="overline">Crafted for elegance.</p>
+          <p className="overline">Web Dev by Ras Ali Labs</p>
         </div>
       </div>
     </footer>

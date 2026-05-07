@@ -44,9 +44,8 @@ export default function Header() {
           {mobileOpen ? <X size={20} /> : <Menu size={20} />}
         </button>
 
-        <Link to="/" data-testid="logo-link" className="flex items-baseline gap-2 select-none">
-          <span className="font-serif text-2xl sm:text-3xl tracking-tight text-espresso">Lebville</span>
-          <span className="hidden sm:inline overline text-terracotta">— Boutique & Spa</span>
+        <Link to="/" data-testid="logo-link" className="flex items-center gap-2 select-none group">
+          <img src="/assets/logo.png" alt="Lebville" className="h-10 sm:h-12 w-auto transition-transform duration-500 group-hover:scale-105" />
         </Link>
 
         <nav className="hidden lg:flex items-center gap-8">
