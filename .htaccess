@@ -1,0 +1,5 @@
+RewriteEngine On
+RewriteRule ^$ frontend/build/index.html [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ frontend/build/$1 [L]
