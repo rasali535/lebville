@@ -20,6 +20,6 @@
   RewriteRule ^ - [L]
 
   # 4. SPA Routing
-  # Fallback to index.html for React routing
-  RewriteRule ^ index.html [L]
+  # Fallback to index.php for React routing
+  RewriteRule ^ index.php [L]
 </IfModule>
