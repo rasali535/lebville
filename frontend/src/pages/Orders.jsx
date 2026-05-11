@@ -16,7 +16,7 @@ export default function Orders() {
   }, []);
 
   return (
-    <div className="pt-32 pb-24 max-w-[1100px] mx-auto px-6 sm:px-10">
+    <div className="max-w-[1100px] mx-auto">
       <div className="mb-12">
         <p className="overline text-terracotta mb-3">My account</p>
         <h1 className="font-serif text-5xl sm:text-6xl text-espresso">Orders.</h1>

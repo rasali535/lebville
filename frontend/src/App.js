@@ -1,6 +1,6 @@
 import React from "react";
 import "@/App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import { AuthProvider } from "./context/AuthContext";
 import { CartProvider } from "./context/CartContext";
@@ -18,6 +18,8 @@ import Register from "./pages/Register";
 import Checkout from "./pages/Checkout";
 import PaymentReturn from "./pages/PaymentReturn";
 import Orders from "./pages/Orders";
+import Booking from "./pages/Booking";
+import DashboardLayout from "./components/DashboardLayout";
 
 function App() {
   return (
@@ -42,13 +44,27 @@ function App() {
                   }
                 />
                 <Route path="/payment/return" element={<PaymentReturn />} />
+                
+                {/* Dashboard Routes */}
                 <Route
-                  path="/orders"
+                  path="/dashboard"
                   element={
                     <ProtectedRoute>
-                      <Orders />
+                      <DashboardLayout />
                     </ProtectedRoute>
                   }
+                >
+                  <Route index element={<Orders />} />
+                  <Route path="orders" element={<Orders />} />
+                  <Route path="booking" element={<Booking />} />
+                  <Route path="profile" element={<div className="font-serif text-3xl">Profile Coming Soon</div>} />
+                  <Route path="settings" element={<div className="font-serif text-3xl">Settings Coming Soon</div>} />
+                </Route>
+
+                {/* Redirect legacy route */}
+                <Route
+                  path="/orders"
+                  element={<Navigate to="/dashboard/orders" replace />}
                 />
               </Routes>
             </main>

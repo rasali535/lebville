@@ -45,7 +45,7 @@ export default function Home() {
             >
               Explore the shop <ArrowRight size={14} />
             </Link>
-            <Link to="/shop?category=makeup" className="btn-sharp text-espresso underline underline-offset-[6px] hover:text-terracotta">
+            <Link to="/shop?category=cosmetics" className="btn-sharp text-espresso underline underline-offset-[6px] hover:text-terracotta">
               Discover HL/SKIN
             </Link>
           </div>
@@ -86,20 +86,20 @@ export default function Home() {
               <span className="overline group-hover:underline underline-offset-4">Browse →</span>
             </div>
           </Link>
-          <Link to="/shop?category=makeup" className="group md:col-span-5 relative overflow-hidden aspect-[4/3]">
+          <Link to="/shop?category=cosmetics" className="group md:col-span-5 relative overflow-hidden aspect-[4/3]">
             <img src={MAKEUP_IMG} alt="NORA Cosmetics" className="absolute inset-0 w-full h-full object-cover product-card-img" />
             <div className="absolute inset-0 bg-gradient-to-t from-espresso/60 via-transparent to-transparent" />
             <div className="absolute bottom-0 left-0 p-6 sm:p-8 text-bone">
-              <p className="overline opacity-80 mb-2">02 — Beauty</p>
-              <h3 className="font-serif text-3xl sm:text-4xl">HL/SKIN Cosmetics.</h3>
+              <p className="overline opacity-80 mb-2">02 — Cosmetics</p>
+              <h3 className="font-serif text-3xl sm:text-4xl">HL/SKIN Beauty.</h3>
             </div>
           </Link>
-          <Link to="/shop?category=skincare" className="group md:col-span-5 relative overflow-hidden aspect-[4/3]">
+          <Link to="/shop?category=cosmetics" className="group md:col-span-5 relative overflow-hidden aspect-[4/3]">
             <img src={SPA_IMG} alt="Spa & Skincare" className="absolute inset-0 w-full h-full object-cover product-card-img" />
             <div className="absolute inset-0 bg-gradient-to-t from-espresso/60 via-transparent to-transparent" />
             <div className="absolute bottom-0 left-0 p-6 sm:p-8 text-bone">
               <p className="overline opacity-80 mb-2">03 — Wellness</p>
-              <h3 className="font-serif text-3xl sm:text-4xl">Skincare & Spa.</h3>
+              <h3 className="font-serif text-3xl sm:text-4xl">Skincare Rituals.</h3>
             </div>
           </Link>
         </div>

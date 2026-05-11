@@ -7,8 +7,7 @@ import { Search, ChevronDown } from "lucide-react";
 const CATEGORY_LABELS = {
   all: "All products",
   clothing: "Clothing",
-  makeup: "HL/SKIN Beauty",
-  skincare: "Skincare",
+  cosmetics: "Cosmetics",
   accessories: "Accessories",
 };
 
@@ -47,7 +46,7 @@ export default function Shop() {
     updateParam("search", searchInput.trim());
   };
 
-  const categories = ["all", "clothing", "makeup", "skincare"];
+  const categories = ["all", "clothing", "cosmetics"];
 
   return (
     <div className="pt-32 pb-24 max-w-[1400px] mx-auto px-6 sm:px-10">

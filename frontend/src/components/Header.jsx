@@ -23,8 +23,7 @@ export default function Header() {
     { to: "/", label: "Home" },
     { to: "/shop", label: "Shop" },
     { to: "/shop?category=clothing", label: "Clothing" },
-    { to: "/shop?category=makeup", label: "Beauty" },
-    { to: "/shop?category=skincare", label: "Skincare" },
+    { to: "/shop?category=cosmetics", label: "Cosmetics" },
   ];
 
   return (
@@ -69,15 +68,18 @@ export default function Header() {
         <div className="flex items-center gap-3 sm:gap-5">
           {user ? (
             <div className="hidden sm:flex items-center gap-3">
-              <Link to="/orders" data-testid="orders-link" className="overline hover:text-terracotta">
-                Orders
+              <Link to="/dashboard" data-testid="dashboard-link" className="overline hover:text-terracotta transition-colors">
+                Dashboard
               </Link>
-              <button data-testid="logout-btn" onClick={logout} className="overline hover:text-terracotta">
+              <Link to="/dashboard/booking" data-testid="bookings-link" className="overline hover:text-terracotta transition-colors">
+                Bookings
+              </Link>
+              <button data-testid="logout-btn" onClick={logout} className="overline hover:text-terracotta transition-colors">
                 Sign out
               </button>
             </div>
           ) : (
-            <Link to="/login" data-testid="login-link" className="hidden sm:inline overline hover:text-terracotta">
+            <Link to="/login" data-testid="login-link" className="hidden sm:inline overline hover:text-terracotta transition-colors">
               Sign in
             </Link>
           )}
@@ -113,8 +115,9 @@ export default function Header() {
             ))}
             {user ? (
               <>
-                <Link to="/orders" className="overline">Orders</Link>
-                <button onClick={logout} className="overline text-left">Sign out</button>
+                <Link to="/dashboard" className="overline text-espresso hover:text-terracotta">Dashboard</Link>
+                <Link to="/dashboard/booking" className="overline text-espresso hover:text-terracotta">Bookings</Link>
+                <button onClick={logout} className="overline text-left text-espresso hover:text-terracotta">Sign out</button>
               </>
             ) : (
               <Link to="/login" className="overline">Sign in</Link>
