@@ -6,7 +6,11 @@ from fastapi import APIRouter, Request, HTTPException
 from pydantic import BaseModel, Field
 from typing import Optional, List
 
-from emergentintegrations.llm.chat import LlmChat, UserMessage
+try:
+    from emergentintegrations.llm.chat import LlmChat, UserMessage
+except ImportError:  # Optional integration is not published on PyPI.
+    LlmChat = None
+    UserMessage = None
 
 router = APIRouter(prefix="/chat", tags=["chat"])
 
@@ -34,8 +38,8 @@ class ChatMessageIn(BaseModel):
 async def chat_message(body: ChatMessageIn, request: Request):
     db = request.app.state.db
     api_key = os.environ.get("EMERGENT_LLM_KEY")
-    if not api_key:
-        raise HTTPException(status_code=500, detail="Chat service not configured")
+    if not api_key or LlmChat is None or UserMessage is None:
+        raise HTTPException(status_code=503, detail="Chat service not configured")
 
     session_id = body.session_id or str(uuid.uuid4())
 
