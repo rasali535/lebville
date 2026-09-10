@@ -31,6 +31,9 @@ app.state.db = db
 
 # ----- CORS -----
 frontend_url = os.environ.get("FRONTEND_URL", "")
+frontend_host = os.environ.get("FRONTEND_HOST", "")
+if not frontend_url and frontend_host:
+    frontend_url = f"https://{frontend_host}"
 allowed = [o.strip() for o in os.environ.get("CORS_ORIGINS", "").split(",") if o.strip()]
 if frontend_url and frontend_url not in allowed:
     allowed.append(frontend_url)

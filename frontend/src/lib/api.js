@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const BASE = process.env.REACT_APP_BACKEND_URL || "";
+const backendHost = process.env.REACT_APP_BACKEND_HOST || "";
+const BASE = process.env.REACT_APP_BACKEND_URL || (backendHost ? `https://${backendHost}` : "");
 export const API = `${BASE}/api`;
 
 export const api = axios.create({

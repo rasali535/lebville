@@ -38,3 +38,14 @@ When the frontend host proxies `/api` to FastAPI, build normally with `npm run b
 
 The destination defaults to `+267 73 011 600`. Once signed in, the administrator can
 change it under **Admin Studio → Settings** without a code change.
+
+## Render Blueprint
+
+The root `render.yaml` provisions the FastAPI API and React storefront in Frankfurt
+on Render's free plan. It connects the generated service hostnames automatically and
+enables deploy-on-commit for `main`.
+
+During Blueprint creation, enter `MONGO_URL`, `ADMIN_EMAIL`, and `ADMIN_PASSWORD`.
+The initial deployment uses DPO mock mode so checkout can be verified safely. Change
+`DPO_MODE` to `live` only after adding the real `DPO_COMPANY_TOKEN` and
+`DPO_SERVICE_TYPE` in Render.

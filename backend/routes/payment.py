@@ -71,7 +71,10 @@ async def create_payment(body: CreatePaymentIn, request: Request, user: dict = D
     if order["status"] == "paid":
         raise HTTPException(status_code=400, detail="Order already paid")
 
-    frontend_url = os.environ.get("FRONTEND_URL", "http://localhost:3000").rstrip("/")
+    frontend_url = os.environ.get("FRONTEND_URL", "").rstrip("/")
+    if not frontend_url:
+        frontend_host = os.environ.get("FRONTEND_HOST", "")
+        frontend_url = f"https://{frontend_host}" if frontend_host else "http://localhost:3000"
 
     if is_mock_mode():
         # Sandbox simulation: produce a mock token and a local redirect that auto-completes

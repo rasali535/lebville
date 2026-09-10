@@ -1,0 +1,62 @@
+services:
+  - type: web
+    name: lebville-api
+    runtime: python
+    plan: free
+    region: frankfurt
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn server:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /api/health
+    autoDeployTrigger: commit
+    buildFilter:
+      paths:
+        - backend/**
+        - render.yaml
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.7
+      - key: DB_NAME
+        value: lebville
+      - key: JWT_SECRET
+        generateValue: true
+      - key: MONGO_URL
+        sync: false
+      - key: ADMIN_EMAIL
+        sync: false
+      - key: ADMIN_PASSWORD
+        sync: false
+      - key: FRONTEND_HOST
+        fromService:
+          type: web
+          name: lebville-store
+          property: host
+      - key: DPO_MODE
+        value: mock
+      - key: DPO_COMPANY_TOKEN
+        sync: false
+      - key: DPO_SERVICE_TYPE
+        sync: false
+
+  - type: web
+    name: lebville-store
+    runtime: static
+    plan: free
+    rootDir: frontend
+    buildCommand: npm ci --legacy-peer-deps && npm run build
+    staticPublishPath: build
+    autoDeployTrigger: commit
+    buildFilter:
+      paths:
+        - frontend/**
+        - render.yaml
+    envVars:
+      - key: REACT_APP_BACKEND_HOST
+        fromService:
+          type: web
+          name: lebville-api
+          property: host
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
