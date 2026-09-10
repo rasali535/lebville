@@ -15,7 +15,7 @@ async def list_products(
     limit: int = 100,
 ):
     db = request.app.state.db
-    query: dict = {}
+    query: dict = {"active": {"$ne": False}}
     if category and category != "all":
         query["category"] = category
     if tag:
@@ -41,14 +41,14 @@ async def list_products(
 @router.get("/categories")
 async def list_categories(request: Request):
     db = request.app.state.db
-    cats = await db.products.distinct("category")
+    cats = await db.products.distinct("category", {"active": {"$ne": False}})
     return {"categories": sorted(cats)}
 
 
 @router.get("/{slug}")
 async def get_product(slug: str, request: Request):
     db = request.app.state.db
-    product = await db.products.find_one({"slug": slug}, {"_id": 0})
+    product = await db.products.find_one({"slug": slug, "active": {"$ne": False}}, {"_id": 0})
     if not product:
         raise HTTPException(status_code=404, detail="Product not found")
     return product

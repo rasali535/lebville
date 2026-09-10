@@ -111,6 +111,13 @@ async def get_current_user(request: Request) -> dict:
         raise HTTPException(status_code=401, detail="Invalid token")
 
 
+async def require_admin(user: dict = Depends(get_current_user)) -> dict:
+    """Allow only authenticated administrators to access management endpoints."""
+    if user.get("role") != "admin":
+        raise HTTPException(status_code=403, detail="Administrator access required")
+    return user
+
+
 # ---- Brute Force ----
 async def check_lockout(db, identifier: str):
     rec = await db.login_attempts.find_one({"identifier": identifier}, {"_id": 0})
@@ -221,8 +228,12 @@ async def refresh_token(request: Request, response: Response):
 
 
 async def seed_admin(db):
-    admin_email = os.environ.get("ADMIN_EMAIL", "admin@lebville.com").lower()
-    admin_password = os.environ.get("ADMIN_PASSWORD", "Lebville@2026")
+    admin_email = os.environ.get("ADMIN_EMAIL", "").strip().lower()
+    admin_password = os.environ.get("ADMIN_PASSWORD", "")
+    if not admin_email or not admin_password:
+        return
+    if len(admin_password) < 12:
+        raise RuntimeError("ADMIN_PASSWORD must contain at least 12 characters")
     existing = await db.users.find_one({"email": admin_email})
     if existing is None:
         await db.users.insert_one({

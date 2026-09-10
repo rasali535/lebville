@@ -17,8 +17,8 @@ export default function Login() {
     setErr("");
     setSubmitting(true);
     try {
-      await login(email, password);
-      navigate(from, { replace: true });
+      const signedIn = await login(email, password);
+      navigate(from !== "/" ? from : signedIn.role === "admin" ? "/admin" : "/", { replace: true });
     } catch (e) {
       setErr(e.message);
     } finally {

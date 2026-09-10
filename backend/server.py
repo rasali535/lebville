@@ -6,7 +6,9 @@ load_dotenv(ROOT_DIR / ".env")
 
 import os
 import logging
-from fastapi import FastAPI, APIRouter
+from datetime import datetime, timezone
+from fastapi import FastAPI, APIRouter, Request
+from fastapi.responses import JSONResponse
 from starlette.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
 
@@ -15,6 +17,8 @@ from routes.products import router as products_router
 from routes.orders import router as orders_router
 from routes.payment import router as payment_router
 from routes.chat import router as chat_router
+from routes.bookings import router as bookings_router
+from routes.admin import router as admin_router, media_router
 from products_data import get_seed_products
 
 # ----- App + DB -----
@@ -41,6 +45,16 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
+@app.middleware("http")
+async def verify_browser_origin(request: Request, call_next):
+    """Block cross-site browser mutations while retaining non-browser API clients."""
+    if request.method in {"POST", "PUT", "PATCH", "DELETE"}:
+        origin = request.headers.get("origin")
+        if origin and origin not in allowed:
+            return JSONResponse(status_code=403, content={"detail": "Origin not allowed"})
+    return await call_next(request)
+
 # ----- Router -----
 api_router = APIRouter(prefix="/api")
 
@@ -60,6 +74,23 @@ api_router.include_router(products_router)
 api_router.include_router(orders_router)
 api_router.include_router(payment_router)
 api_router.include_router(chat_router)
+api_router.include_router(bookings_router)
+api_router.include_router(admin_router)
+api_router.include_router(media_router)
+
+
+@api_router.get("/storefront")
+async def storefront(request: Request):
+    now = datetime.now(timezone.utc).isoformat()
+    specials = await request.app.state.db.specials.find({
+        "active": True,
+        "$and": [
+            {"$or": [{"starts_at": None}, {"starts_at": ""}, {"starts_at": {"$lte": now}}]},
+            {"$or": [{"ends_at": None}, {"ends_at": ""}, {"ends_at": {"$gte": now}}]},
+        ],
+    }, {"_id": 0}).sort("created_at", -1).to_list(20)
+    settings = await request.app.state.db.settings.find_one({"key": "storefront"}, {"_id": 0}) or {"whatsapp_number": "+26773011600"}
+    return {"specials": specials, "whatsapp_number": settings.get("whatsapp_number", "+26773011600")}
 app.include_router(api_router)
 
 
@@ -79,6 +110,10 @@ async def startup():
     await db.orders.create_index("user_id")
     await db.login_attempts.create_index("identifier")
     await db.chat_messages.create_index("session_id")
+    await db.bookings.create_index("id", unique=True)
+    await db.bookings.create_index("status")
+    await db.specials.create_index("id", unique=True)
+    await db.audit_log.create_index("created_at")
 
     # Seed admin
     await seed_admin(db)

@@ -64,6 +64,7 @@ export default function PaymentReturn() {
             <div className="flex justify-between text-sm font-light"><span>Total paid</span><span className="font-medium">{formatBWP(order.total)}</span></div>
           </div>
           <div className="flex flex-wrap items-center justify-center gap-4">
+            {order.whatsapp_url && <a href={order.whatsapp_url} target="_blank" rel="noreferrer" className="btn-sharp bg-[#25D366] text-white px-8 py-4">Send order to WhatsApp</a>}
             <Link to="/orders" data-testid="view-orders-link" className="btn-sharp bg-espresso text-bone px-8 py-4 hover:bg-terracotta">View my orders</Link>
             <Link to="/shop" className="btn-sharp text-espresso underline underline-offset-4">Continue shopping</Link>
           </div>

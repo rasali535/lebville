@@ -20,6 +20,8 @@ import PaymentReturn from "./pages/PaymentReturn";
 import Orders from "./pages/Orders";
 import Booking from "./pages/Booking";
 import DashboardLayout from "./components/DashboardLayout";
+import AdminRoute from "./components/AdminRoute";
+import AdminPortal from "./pages/AdminPortal";
 
 function App() {
   return (
@@ -35,6 +37,7 @@ function App() {
                 <Route path="/product/:slug" element={<ProductDetail />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
+                <Route path="/booking" element={<Booking />} />
                 <Route
                   path="/checkout"
                   element={
@@ -44,6 +47,7 @@ function App() {
                   }
                 />
                 <Route path="/payment/return" element={<PaymentReturn />} />
+                <Route path="/admin" element={<AdminRoute><AdminPortal /></AdminRoute>} />
                 
                 {/* Dashboard Routes */}
                 <Route
@@ -56,7 +60,7 @@ function App() {
                 >
                   <Route index element={<Orders />} />
                   <Route path="orders" element={<Orders />} />
-                  <Route path="booking" element={<Booking />} />
+                  <Route path="booking" element={<Navigate to="/booking" replace />} />
                   <Route path="profile" element={<div className="font-serif text-3xl">Profile Coming Soon</div>} />
                   <Route path="settings" element={<div className="font-serif text-3xl">Settings Coming Soon</div>} />
                 </Route>

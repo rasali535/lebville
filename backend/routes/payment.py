@@ -126,7 +126,10 @@ async def verify_payment(body: VerifyIn, request: Request, user: dict = Depends(
     if not order:
         raise HTTPException(status_code=404, detail="Order not found")
 
-    if is_mock_mode() or body.trans_token.startswith("MOCK-"):
+    if is_mock_mode():
+        stored_token = order.get("payment", {}).get("trans_token")
+        if not stored_token or body.trans_token != stored_token or not body.trans_token.startswith("MOCK-"):
+            raise HTTPException(status_code=400, detail="Invalid payment token")
         await db.orders.update_one(
             {"id": order["id"]},
             {"$set": {
@@ -139,6 +142,13 @@ async def verify_payment(body: VerifyIn, request: Request, user: dict = Depends(
         )
         updated = await db.orders.find_one({"id": order["id"]}, {"_id": 0})
         return {"ok": True, "status": "paid", "order": updated}
+
+    if body.trans_token.startswith("MOCK-"):
+        raise HTTPException(status_code=400, detail="Mock payment tokens are disabled")
+
+    stored_token = order.get("payment", {}).get("trans_token")
+    if not stored_token or body.trans_token != stored_token:
+        raise HTTPException(status_code=400, detail="Payment token does not belong to this order")
 
     # Live verify
     payment_api = os.environ.get("DPO_API_URL", "https://secure.3gdirectpay.com/API/v6/")

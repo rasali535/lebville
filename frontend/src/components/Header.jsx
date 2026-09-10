@@ -24,6 +24,7 @@ export default function Header() {
     { to: "/shop", label: "Shop" },
     { to: "/shop?category=clothing", label: "Clothing" },
     { to: "/shop?category=cosmetics", label: "Cosmetics" },
+    { to: "/booking", label: "Book" },
   ];
 
   return (
@@ -68,11 +69,8 @@ export default function Header() {
         <div className="flex items-center gap-3 sm:gap-5">
           {user ? (
             <div className="hidden sm:flex items-center gap-3">
-              <Link to="/dashboard" data-testid="dashboard-link" className="overline hover:text-terracotta transition-colors">
-                Dashboard
-              </Link>
-              <Link to="/dashboard/booking" data-testid="bookings-link" className="overline hover:text-terracotta transition-colors">
-                Bookings
+              <Link to={user.role === "admin" ? "/admin" : "/dashboard"} data-testid="dashboard-link" className="overline hover:text-terracotta transition-colors">
+                {user.role === "admin" ? "Admin" : "Dashboard"}
               </Link>
               <button data-testid="logout-btn" onClick={logout} className="overline hover:text-terracotta transition-colors">
                 Sign out
@@ -115,8 +113,7 @@ export default function Header() {
             ))}
             {user ? (
               <>
-                <Link to="/dashboard" className="overline text-espresso hover:text-terracotta">Dashboard</Link>
-                <Link to="/dashboard/booking" className="overline text-espresso hover:text-terracotta">Bookings</Link>
+                <Link to={user.role === "admin" ? "/admin" : "/dashboard"} className="overline text-espresso hover:text-terracotta">{user.role === "admin" ? "Admin" : "Dashboard"}</Link>
                 <button onClick={logout} className="overline text-left text-espresso hover:text-terracotta">Sign out</button>
               </>
             ) : (

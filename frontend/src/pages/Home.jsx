@@ -13,6 +13,7 @@ const SPA_IMG = "https://images.pexels.com/photos/36327500/pexels-photo-36327500
 export default function Home() {
   const [featured, setFeatured] = useState([]);
   const [newArrivals, setNewArrivals] = useState([]);
+  const [specials, setSpecials] = useState([]);
 
   useEffect(() => {
     api.get("/products?sort=recent").then(({ data }) => {
@@ -20,10 +21,12 @@ export default function Home() {
       setNewArrivals(items.filter((p) => p.tag === "new").slice(0, 4));
       setFeatured(items.filter((p) => p.tag === "bestseller" || p.tag === "clearance").slice(0, 8));
     });
+    api.get("/storefront").then(({ data }) => setSpecials(data.specials || [])).catch(() => {});
   }, []);
 
   return (
     <div className="bg-bone">
+      {specials.length > 0 && <section className="pt-24 bg-terracotta text-white"><div className="max-w-[1400px] mx-auto px-6 sm:px-10 py-3 text-center"><span className="overline">{specials[0].title}</span>{specials[0].description && <span className="ml-3 text-sm font-light">{specials[0].description}</span>}</div></section>}
       {/* HERO */}
       <section data-testid="hero-section" className="relative min-h-[100vh] grid grid-cols-1 lg:grid-cols-12 pt-24 lg:pt-32 px-6 sm:px-10 max-w-[1400px] mx-auto gap-8 lg:gap-12">
         <div className="lg:col-span-6 flex flex-col justify-center reveal">

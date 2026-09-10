@@ -67,6 +67,7 @@ export default function Orders() {
                   </li>
                 ))}
               </ul>
+              {o.whatsapp_url && <a href={o.whatsapp_url} target="_blank" rel="noreferrer" className="inline-block mt-6 bg-[#25D366] text-white px-5 py-3 text-xs uppercase tracking-widest">Send to Lebville on WhatsApp</a>}
             </div>
           ))}
         </div>
