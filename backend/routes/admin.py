@@ -8,7 +8,7 @@ from bson import ObjectId
 from fastapi import APIRouter, Depends, File, HTTPException, Request, UploadFile
 from fastapi.responses import StreamingResponse
 from motor.motor_asyncio import AsyncIOMotorGridFSBucket
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, EmailStr, Field
 
 from auth import require_admin
 
@@ -66,6 +66,19 @@ class SpecialIn(BaseModel):
 
 
 class StatusIn(BaseModel):
+    status: str
+
+
+class BookingIn(BaseModel):
+    service_id: str = Field(min_length=1, max_length=100)
+    service_name: str = Field(min_length=1, max_length=160)
+    customer_name: str = Field(min_length=2, max_length=120)
+    phone: str = Field(min_length=7, max_length=30)
+    email: Optional[EmailStr] = None
+    preferred_date: str = Field(min_length=8, max_length=20)
+    preferred_time: str = Field(min_length=3, max_length=20)
+    guests: int = Field(default=1, ge=1, le=30)
+    notes: Optional[str] = Field(default=None, max_length=1000)
     status: str
 
 
@@ -201,6 +214,30 @@ async def update_booking_status(booking_id: str, body: StatusIn, request: Reques
         raise HTTPException(404, "Booking not found")
     await _audit(db, admin, "booking.status", booking_id, body.status)
     return await db.bookings.find_one({"id": booking_id}, {"_id": 0})
+
+
+@router.put("/bookings/{booking_id}")
+async def update_booking(booking_id: str, body: BookingIn, request: Request, admin=Depends(require_admin)):
+    if body.status not in BOOKING_STATUSES:
+        raise HTTPException(422, "Invalid booking status")
+    db = request.app.state.db
+    data = {**body.model_dump(), "updated_at": now_iso()}
+    result = await db.bookings.update_one({"id": booking_id}, {"$set": data})
+    if not result.matched_count:
+        raise HTTPException(404, "Booking not found")
+    await _audit(db, admin, "booking.updated", booking_id, body.customer_name)
+    return await db.bookings.find_one({"id": booking_id}, {"_id": 0})
+
+
+@router.delete("/bookings/{booking_id}")
+async def delete_booking(booking_id: str, request: Request, admin=Depends(require_admin)):
+    db = request.app.state.db
+    booking = await db.bookings.find_one({"id": booking_id}, {"_id": 0})
+    if not booking:
+        raise HTTPException(404, "Booking not found")
+    await db.bookings.delete_one({"id": booking_id})
+    await _audit(db, admin, "booking.deleted", booking_id, booking.get("booking_number"))
+    return {"ok": True}
 
 
 @router.post("/media")
