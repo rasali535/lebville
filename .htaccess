@@ -3,10 +3,17 @@
   RewriteBase /
   
   # 1. API Routing
-  # Route /api/products to the PHP script
+  # Route /api/products/:slug or /api/products/categories
+  RewriteRule ^api/products/(.+)$ api/products/index.php?slug=$1 [L,QSA]
+  # Route /api/products
   RewriteRule ^api/products/?$ api/products/index.php [L,QSA]
-
-  # Route /api/chat/message to the PHP script
+  # Route /api/storefront
+  RewriteRule ^api/storefront/?$ api/storefront/index.php [L,QSA]
+  # Route /api/health
+  RewriteRule ^api/health/?$ api/health/index.php [L,QSA]
+  # Route /api/bookings
+  RewriteRule ^api/bookings/?$ api/bookings/index.php [L,QSA]
+  # Route /api/chat/message
   RewriteRule ^api/chat/message/?$ api/chat/message/index.php [L,QSA]
 
   # 2. Asset Routing
