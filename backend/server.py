@@ -127,6 +127,18 @@ async def startup():
         seed = get_seed_products()
         await db.products.insert_many(seed)
         logger.info(f"Seeded {len(seed)} products.")
+    else:
+        # Add newly introduced catalogue items without overwriting admin edits.
+        added = 0
+        for product in get_seed_products():
+            result = await db.products.update_one(
+                {"slug": product["slug"]},
+                {"$setOnInsert": product},
+                upsert=True,
+            )
+            added += int(result.upserted_id is not None)
+        if added:
+            logger.info(f"Added {added} new catalogue items.")
 
 
 @app.on_event("shutdown")

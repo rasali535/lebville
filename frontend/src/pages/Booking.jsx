@@ -26,6 +26,8 @@ export default function Booking() {
     } catch (err) { setError(formatApiError(err)); } finally { setSubmitting(false); }
   };
 
+  const bookingPrice = (service) => service.price > 0 ? formatBWP(service.price) : "Custom quote";
+
   return (
     <div className="max-w-[1200px] mx-auto">
       <div className="mb-16">
@@ -63,14 +65,14 @@ export default function Booking() {
               <div className="p-10 flex-1 flex flex-col">
                 <div className="flex justify-between items-baseline mb-6">
                    <h3 className="font-serif text-3xl text-espresso group-hover:text-terracotta transition-colors">{s.name}</h3>
-                   <p className="font-serif text-2xl text-espresso/60">{formatBWP(s.price)}</p>
+                   <p className="font-serif text-2xl text-espresso/60">{bookingPrice(s)}</p>
                 </div>
                 <p className="text-base text-muted-foreground font-light leading-relaxed mb-8 flex-1">
                   {s.description}
                 </p>
                 <div className="flex flex-wrap items-center gap-x-8 gap-y-4 text-[11px] text-muted-foreground overline mb-10 pb-8 border-b border-espresso/5">
                    <span className="flex items-center gap-2 text-espresso"><Clock size={14} className="text-terracotta"/> {s.sizes?.[0] || "By appointment"}</span>
-                   <span className="flex items-center gap-2 text-espresso"><MapPin size={14} className="text-terracotta"/> In-Studio</span>
+                   <span className="flex items-center gap-2 text-espresso"><MapPin size={14} className="text-terracotta"/> By arrangement</span>
                    <span className="flex items-center gap-2 text-espresso"><Sparkles size={14} className="text-terracotta"/> Premium</span>
                 </div>
                 <button onClick={() => setSelected(s)} className="w-full bg-espresso text-white py-5 px-8 hover:bg-terracotta transition-all duration-500 overline tracking-[0.3em] text-xs font-medium relative overflow-hidden group/btn">
@@ -108,7 +110,7 @@ export default function Booking() {
       {selected && <div className="fixed inset-0 z-[80] bg-espresso/60 backdrop-blur-sm p-4 overflow-y-auto">
         <form onSubmit={submitBooking} className="bg-bone max-w-2xl mx-auto my-10 p-6 sm:p-10 relative">
           <button type="button" onClick={()=>setSelected(null)} className="absolute right-5 top-5 text-2xl" aria-label="Close">×</button>
-          <p className="overline text-terracotta mb-2">Booking request</p><h2 className="font-serif text-4xl mb-2">{selected.name}</h2><p className="text-muted-foreground mb-8">{formatBWP(selected.price)} · {selected.sizes?.[0] || "By appointment"}</p>
+          <p className="overline text-terracotta mb-2">Booking request</p><h2 className="font-serif text-4xl mb-2">{selected.name}</h2><p className="text-muted-foreground mb-8">{bookingPrice(selected)} · {selected.sizes?.[0] || "By appointment"}</p>
           <div className="grid sm:grid-cols-2 gap-5">
             <div><label className="overline text-muted-foreground">Your name</label><input required className="luxury-input" value={form.customer_name} onChange={e=>setForm(f=>({...f,customer_name:e.target.value}))}/></div>
             <div><label className="overline text-muted-foreground">WhatsApp number</label><input required className="luxury-input" placeholder="+267 7X XXX XXX" value={form.phone} onChange={e=>setForm(f=>({...f,phone:e.target.value}))}/></div>
