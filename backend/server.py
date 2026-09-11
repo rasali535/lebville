@@ -24,9 +24,16 @@ from products_data import get_seed_products
 # ----- App + DB -----
 app = FastAPI(title="Lebville Boutique API", version="1.0.0")
 
-mongo_url = os.environ["MONGO_URL"]
-db_client = AsyncIOMotorClient(mongo_url)
-db = db_client[os.environ["DB_NAME"]]
+mongo_url = os.environ.get("MONGO_URL", "mock")
+use_mock = mongo_url.lower() == "mock" or os.environ.get("USE_MOCK_DB", "").lower() in ("true", "1")
+
+if use_mock:
+    from mongomock_motor import AsyncMongoMockClient
+    db_client = AsyncMongoMockClient()
+else:
+    db_client = AsyncIOMotorClient(mongo_url)
+
+db = db_client[os.environ.get("DB_NAME", "lebville")]
 app.state.db = db
 
 # ----- CORS -----
@@ -104,8 +111,19 @@ logger = logging.getLogger(__name__)
 
 @app.on_event("startup")
 async def startup():
+    global db, db_client
+    try:
+        # Test connection / create indexes
+        await db.users.create_index("email", unique=True)
+    except Exception as e:
+        logger.warning(f"MongoDB connection/auth failed ({e}). Falling back to in-memory Mock DB for local preview.")
+        from mongomock_motor import AsyncMongoMockClient
+        db_client = AsyncMongoMockClient()
+        db = db_client[os.environ.get("DB_NAME", "lebville")]
+        app.state.db = db
+        await db.users.create_index("email", unique=True)
+
     # Indexes
-    await db.users.create_index("email", unique=True)
     await db.users.create_index("id", unique=True)
     await db.products.create_index("slug", unique=True)
     await db.products.create_index("category")

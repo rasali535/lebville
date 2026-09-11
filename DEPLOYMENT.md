@@ -7,7 +7,9 @@ The admin portal is available at `/admin` and uses the FastAPI service under `/a
 Set these values in the backend hosting environment. Never commit their real values.
 
 ```text
-MONGO_URL=mongodb+srv://...
+MONGO_URL=mongodb+srv://<username>:<encoded_password>@cluster.mongodb.net/...
+# Note: If your MongoDB password contains special characters (like @, #, $, %, etc.),
+# you must URL-encode (percent-encode) the password (e.g. using urllib.parse.quote_plus).
 DB_NAME=lebville
 JWT_SECRET=<at least 32 random bytes>
 ADMIN_EMAIL=<the Lebville administrator email>
