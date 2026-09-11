@@ -46,15 +46,22 @@ def create_refresh_token(user_id: str) -> str:
     return jwt.encode(payload, get_jwt_secret(), algorithm=JWT_ALGORITHM)
 
 
+def is_prod_env() -> bool:
+    is_render = bool(os.environ.get("RENDER") or os.environ.get("RENDER_SERVICE_ID") or os.environ.get("RENDER_INSTANCE_ID"))
+    env_name = os.environ.get("ENVIRONMENT", os.environ.get("ENV", "production" if is_render else "development")).strip().lower()
+    return is_render or env_name in ("production", "prod", "live")
+
+
 def set_auth_cookies(response: Response, access: str, refresh: str):
+    is_prod = is_prod_env()
     response.set_cookie(
         key="access_token", value=access, httponly=True,
-        secure=True, samesite="none",
+        secure=is_prod, samesite="none" if is_prod else "lax",
         max_age=ACCESS_TOKEN_MINUTES * 60, path="/",
     )
     response.set_cookie(
         key="refresh_token", value=refresh, httponly=True,
-        secure=True, samesite="none",
+        secure=is_prod, samesite="none" if is_prod else "lax",
         max_age=REFRESH_TOKEN_DAYS * 86400, path="/",
     )
 
@@ -217,9 +224,10 @@ async def refresh_token(request: Request, response: Response):
         if not user:
             raise HTTPException(status_code=401, detail="User not found")
         access = create_access_token(user["id"], user["email"])
+        is_prod = is_prod_env()
         response.set_cookie(
             key="access_token", value=access, httponly=True,
-            secure=True, samesite="none",
+            secure=is_prod, samesite="none" if is_prod else "lax",
             max_age=ACCESS_TOKEN_MINUTES * 60, path="/",
         )
         return {"ok": True}

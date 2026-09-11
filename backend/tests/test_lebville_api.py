@@ -114,6 +114,23 @@ class TestProducts:
         cats = data if isinstance(data, list) else data.get("categories") or []
         assert len(cats) > 0
 
+    def test_booking_services(self, session):
+        r = session.get(f"{API}/products?category=service")
+        assert r.status_code == 200
+        items = r.json() if isinstance(r.json(), list) else r.json().get("items") or []
+        names = [p["name"] for p in items]
+        expected_services = [
+            "Mobile Spa",
+            "Online Boutique",
+            "Events",
+            "Professional Counselling",
+            "Body Transformation",
+            "Logistics",
+        ]
+        for service in expected_services:
+            assert service in names, f"Service '{service}' missing from products API response"
+
+
 
 # ---------- Auth ----------
 class TestAuth:
